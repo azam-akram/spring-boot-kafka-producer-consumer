@@ -1,6 +1,4 @@
 server:
-  servlet:
-    context-path: /odp-common-error-consumer/${application.api.version}
   port: 5555
 
 application:
