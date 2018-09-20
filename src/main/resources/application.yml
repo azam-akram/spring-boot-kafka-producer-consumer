@@ -1,0 +1,18 @@
+server:
+  servlet:
+    context-path: /odp-common-error-consumer/${application.api.version}
+  port: 5555
+
+application:
+  api:
+    version: v1
+  topic:
+    common-error: demo-kafka-topic
+
+spring:
+  kafka:
+    consumer:
+      group-id: demo-kafka-consumer
+      bootstrap-servers: 127.0.0.1:9092
+      enable-auto-commit: true
+      auto-offset-reset: earliest
