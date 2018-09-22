@@ -25,4 +25,9 @@ Stop docker-compose (once you are done)
 docker-compose down
 ```
 
+### Walk through the code
+ Don't worry about complex configurations for Kafka, Spring Boot provides some properties to configure Kafka Producer and Consumer.
+ 
+ 
+ 
 Continue ...
