@@ -13,10 +13,18 @@ public class KafkaProducer {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    @Value("${application.topic.common-error}")
+    @Value("${application.topic.message-topic}")
     private String topic;
 
-    public void sendMessage(String msg) {
-        kafkaTemplate.send(topic, msg);
+    public void sendMessage() {
+        kafkaTemplate.send(topic, createMessage());
+    }
+
+    private String createMessage() {
+        return "{  \n" +
+                "   \"uuid\":\"kdfe25b9-akda-49bf-ab3a-6482a19ahshs\",\n" +
+                "   \"from\":\"Sender\",\n" +
+                "   \"to\":\"Receiver\"\n" +
+                "}";
     }
 }

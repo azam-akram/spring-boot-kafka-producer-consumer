@@ -17,6 +17,6 @@ public class KafkaDemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        producer.sendMessage("Hello world message");
+        producer.sendMessage();
     }
 }

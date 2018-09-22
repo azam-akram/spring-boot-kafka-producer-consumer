@@ -5,7 +5,7 @@ application:
   api:
     version: v1
   topic:
-    common-error: demo-kafka-topic
+    message-topic: demo-kafka-topic
 
 spring:
   kafka:
