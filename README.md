@@ -46,12 +46,6 @@ I used String as format of message to exchange that is why use StringSerializer 
 Message class is simple POJO,
 
 ```
-@Getter
-@Setter
-@ToString
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class Message {
 
     @NotNull
