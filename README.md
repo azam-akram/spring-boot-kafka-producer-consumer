@@ -2,12 +2,12 @@
 
 This little project demonstrate the easiest and simplest way to create kafka producer and consumer.
 
-### What frameworks are used in this project?
+### Frameworks
 
-* Spring Boot: "Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run"." Read more (https://spring.io/projects/spring-boot)
-* Apache Kafka: Apache Kafka is a distributed streaming platform, based on subscribed-publish-consumer model to exchange messages between producer and consumer. Read more (https://kafka.apache.org/intro)
-* Apache Zookeeper: "ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services." (https://zookeeper.apache.org/)
-* Docker-compose: Docker Compose is a tool for defining and running multi-container Docker applications. Read more (https://docs.docker.com/compose/)
+* **Spring Boot:** "Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run"." Read (https://spring.io/projects/spring-boot)
+* **Apache Kafka:** Apache Kafka is a distributed streaming platform, based on subscribed-publish-consumer model to exchange messages between producer and consumer. Read more (https://kafka.apache.org/intro)
+* **Apache Zookeeper:** "ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services." (https://zookeeper.apache.org/)
+* **Docker-compose:** Docker Compose is a tool for defining and running multi-container Docker applications. Read more (https://docs.docker.com/compose/)
 
 
 ### Prerequisites
@@ -15,15 +15,13 @@ This little project demonstrate the easiest and simplest way to create kafka pro
 This project uses docker-compose to run Zookeeper and Kafka docker containers, which means you don't need to install Kafka and Zookeeper locally.
 
 ### Walk through the code
-Don't worry about complex configurations for Kafka, Spring Boot provides some properties to configure Kafka Producer and Consumer.
+Don't worry about complex configurations for Kafka, Spring Boot provides some properties to configure Kafka Producer and Consumer setup.
 
 ```
 server:
   port: 5555
 
 application:
-  api:
-    version: v1
   topic:
     message-topic: demo-kafka-topic
 
@@ -41,7 +39,7 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 ```
 
-I used String as format of message to exchange that is why use StringSerializer and StringDeserializer. On receiving th message consumer unmarshals the message into Message class object.
+I used String message format to exchange between producer and consumer that means I used StringSerializer and StringDeserializer. 
 
 Message class is simple POJO,
 
