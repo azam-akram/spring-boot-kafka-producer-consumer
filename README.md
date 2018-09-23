@@ -12,10 +12,10 @@ This little project demonstrate the easiest and simplest way to create kafka pro
 
 ### Prerequisites
 
-This project uses docker-compose to run Zookeeper and Kafka docker containers, which means you don't need to install Kafka and Zookeeper locally.
+It uses docker-compose to run Zookeeper and Kafka docker containers, so you don't need to install Kafka and Zookeeper locally.
 
 ### Walk through the code
-Don't worry about complex configurations for Kafka, Spring Boot provides some properties to configure Kafka Producer and Consumer setup.
+Spring Boot saves the developers from complex configurations for Kafka, and provides some properties to configure Kafka Producer and Consumer setup.
 
 ```
 server:
@@ -117,9 +117,9 @@ You see KafkaConsumer has one very simple onMessage callback method. @KafkaListn
 
 ConsumerRecord is the data structure which carries all the necessary information for the exchanged message.
 
-### How to run?
+### Running the application
 
-Run the docker compose by following command,
+If you want to test application locally then run the docker compose by,
 
 First run the docker compose
 
@@ -127,9 +127,67 @@ First run the docker compose
 docker-compose up -d
 ```
 
+Then run the KafkaDemoApplication to exchange the message.
+
 Stop docker-compose (once you are done)
 ```bash
 docker-compose down
 ```
 
-Then run the KafkaDemoApplication to exchange the message.
+### Dockerizing the application
+
+In order to dockerize this application we need to add gradle-docker dependency,
+
+```
+buildscript {
+    ext {
+        springBootVersion = '2.0.5.RELEASE'
+        gradleDockerVersion   = "1.2"
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        // Dependency for docker
+        classpath("se.transmode.gradle:gradle-docker:${gradleDockerVersion}")
+    }
+}
+```
+
+and docker plugin
+
+```
+apply plugin: 'docker'
+```
+
+I added a gradle task in build.gradle file
+
+```
+group 'spring-boot-kafka-producer-consumer' // used for tag name of the image
+
+task buildDocker(type: Docker, dependsOn: build) {
+    push = false // I don't push the image to docker hub
+    applicationName = jar.baseName // tag name of image, group/jar-file-name
+    dockerfile = file('Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
+}
+```
+
+add Dockerfile
+```
+FROM java:8
+EXPOSE 5556
+VOLUME /tmp
+ADD spring-boot-kafka-producer-consumer-1.0-SNAPSHOT.jar app.jar
+RUN bash -c 'touch /app.jar'
+ENTRYPOINT ["java","-jar","/app.jar"]
+```
+
+and now all set to run the docker image,
+```
+docker run -i spring-boot-kafka-producer-consumer/spring-boot-kafka-producer-consumer:1.0-SNAPSHOT
+```
+
