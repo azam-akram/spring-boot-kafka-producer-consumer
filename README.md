@@ -136,7 +136,7 @@ docker-compose down
 
 ### Dockerizing the application
 
-In order to dockerize this application we need to add gradle-docker dependency,
+In order to dockerize this application we need to add gradle-docker dependency in build.gradle file,
 
 ```
 buildscript {
