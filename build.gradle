@@ -1,9 +1,12 @@
 buildscript {
     ext {
         springBootVersion = '2.0.5.RELEASE'
+        gradleDockerVersion   = "1.2"
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        // Dependency for docker
+        classpath("se.transmode.gradle:gradle-docker:${gradleDockerVersion}")
     }
 }
 
@@ -16,6 +19,7 @@ apply plugin: 'project-report'
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'docker'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -25,7 +29,6 @@ lombok {
     sha256 = ""
 }
 
-group 'spring-boot-kafka-producer-consumer'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -42,4 +45,19 @@ dependencies {
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
+}
+
+group 'spring-boot-kafka-producer-consumer'
+
+// build docker image
+task buildDocker(type: Docker, dependsOn: build) {
+    push = false
+    applicationName = jar.baseName
+    dockerfile = file('Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
 }
