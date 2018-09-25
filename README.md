@@ -89,13 +89,13 @@ Spring Boot reads the properties and configure the Producer and Consumer for you
 ```java
 @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
-```java
+```
 
 and then send the message,
 
 ```java
 kafkaTemplate.send(topic, createMessage());
-```java
+```
 
 Ofcourse we need to mention kafka topic we want to send message to.
 
@@ -177,7 +177,7 @@ task buildDocker(type: Docker, dependsOn: build) {
 ```
 
 add Dockerfile
-```
+```Dockerfile
 FROM java:8
 EXPOSE 5556
 VOLUME /tmp
