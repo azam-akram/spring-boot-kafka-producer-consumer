@@ -17,7 +17,7 @@ It uses docker-compose to run Zookeeper and Kafka docker containers, so you don'
 ### Walk through the code
 Spring Boot saves the developers from complex configurations for Kafka, and provides some properties to configure Kafka Producer and Consumer setup.
 
-```
+```yml
 server:
   port: 5555
 
@@ -59,7 +59,7 @@ public class Message {
 
 Now we left with just to make a KafkaProducer class to send the message and a KafkaConsumer class to receive that message.
 
-```
+```java
 @Slf4j
 @Component
 public class KafkaProducer {
@@ -86,22 +86,22 @@ public class KafkaProducer {
 
 Spring Boot reads the properties and configure the Producer and Consumer for you, all you need to Autowired the KafkaTemplate into your Producer class,
 
-```
+```java
 @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
-```
+```java
 
 and then send the message,
 
-```
+```java
 kafkaTemplate.send(topic, createMessage());
-```
+```java
 
 Ofcourse we need to mention kafka topic we want to send message to.
 
 On receiving end, I have a KafkaConsumer class,
 
-```
+```java
 @Slf4j
 @Component
 public class KafkaConsumer {
@@ -138,7 +138,7 @@ docker-compose down
 
 In order to dockerize this application we need to add gradle-docker dependency in build.gradle file,
 
-```
+```gradle
 buildscript {
     ext {
         springBootVersion = '2.0.5.RELEASE'
@@ -154,13 +154,13 @@ buildscript {
 
 and docker plugin
 
-```
+```gradle
 apply plugin: 'docker'
 ```
 
 I added a gradle task in build.gradle file
 
-```
+```gradle
 group 'spring-boot-kafka-producer-consumer' // used for tag name of the image
 
 task buildDocker(type: Docker, dependsOn: build) {
