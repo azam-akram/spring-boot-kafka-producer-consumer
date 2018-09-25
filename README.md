@@ -43,7 +43,7 @@ I used String message format to exchange between producer and consumer that mean
 
 Message class is simple POJO,
 
-```
+```java
 public class Message {
 
     @NotNull
