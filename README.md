@@ -1,6 +1,6 @@
 # spring-boot-kafka-producer-consumer
 
-This little project demonstrate the easiest and simplest way to create kafka producer and consumer and dockerizing it. The Producer sends a message to Kafka topic and the consumer consumes that message.
+This little project demonstrate the easier and simpler way to create kafka producer and consumer and dockerizing it. The Producer sends a message to Kafka topic and the consumer consumes that message.
 
 ### Frameworks
 
@@ -12,10 +12,10 @@ This little project demonstrate the easiest and simplest way to create kafka pro
 
 ### Prerequisites
 
-It uses docker-compose to run Zookeeper and Kafka docker containers, so you don't need to install Kafka and Zookeeper locally.
+I used docker-compose to run Zookeeper and Kafka containers, so no need to install Kafka and Zookeeper locally.
 
 ### Walk through the code
-Spring Boot saves the developers from complex configurations for Kafka, and provides some properties to configure Kafka Producer and Consumer setup.
+Spring Boot saves the developers from complex configurations for Kafka, and provides some properties to configure Kafka Producer and Consumer.
 
 ```yml
 server:
@@ -39,7 +39,7 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 ```
 
-I used String message format to exchange between producer and consumer that means I used StringSerializer and StringDeserializer. 
+The producer sends message serlialized in string format, for that purpose I used StringSerializer and StringDeserializer. 
 
 Message class is simple POJO,
 
@@ -84,7 +84,7 @@ public class KafkaProducer {
 }
 ```
 
-Spring Boot reads the properties and configure the Producer and Consumer for you, all you need to Autowired the KafkaTemplate into your Producer class,
+Spring Boot provides kafka configuration properties, which setups the producer and consumer, all you need to Autowired the KafkaTemplate into your Producer class,
 
 ```java
 @Autowired
@@ -99,7 +99,7 @@ kafkaTemplate.send(topic, createMessage());
 
 Ofcourse we need to mention kafka topic we want to send message to.
 
-On receiving end, I have a KafkaConsumer class,
+On receiving end, we have KafkaConsumer class,
 
 ```java
 @Slf4j
@@ -113,7 +113,7 @@ public class KafkaConsumer {
 }
 ```
 
-You see KafkaConsumer has one very simple onMessage callback method. @KafkaListner annotation does the magic for you, you need to override it into your class.
+KafkaConsumer has one very simple onMessage callback method. @KafkaListner annotation does the magic for you.
 
 ConsumerRecord is the data structure which carries all the necessary information for the exchanged message.
 
