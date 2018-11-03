@@ -136,7 +136,7 @@ docker-compose down
 
 ### Dockerizing the application
 
-In order to dockerize this application we need to add gradle-docker dependency in build.gradle file,
+I added a gradle task to build gradle. First include gradle dependency in build.gralde, 
 
 ```gradle
 buildscript {
@@ -158,13 +158,13 @@ and docker plugin
 apply plugin: 'docker'
 ```
 
-I added a gradle task in build.gradle file
+then add a gradle task in build.gradle file
 
 ```gradle
 group 'spring-boot-kafka-producer-consumer' // used for tag name of the image
 
 task buildDocker(type: Docker, dependsOn: build) {
-    push = false // I don't push the image to docker hub
+    push = false // not pushing the image to docker hub
     applicationName = jar.baseName // tag name of image, group/jar-file-name
     dockerfile = file('Dockerfile')
     doFirst {
