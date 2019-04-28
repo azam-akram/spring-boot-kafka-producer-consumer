@@ -136,7 +136,7 @@ docker-compose down
 
 ### Dockerizing the application
 
-I added a gradle task to build gradle. First include gradle dependency in build.gralde, 
+I added a gradle task to build docker image. First include gradle dependency in build.gralde, 
 
 ```gradle
 buildscript {
