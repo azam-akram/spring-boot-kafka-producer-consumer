@@ -1,10 +1,10 @@
 # spring-boot-kafka-producer-consumer
 
-This little project demonstrate the easier and simpler way to create kafka producer and consumer and dockerizing it. The Producer sends a message to Kafka topic and the consumer consumes that message.
+This little project demonstrate the easier and simpler way to create kafka producer and consumer and dockerizing it. The Producer sends a message to Kafka topic and the consumer consumes that message, That's it!
 
 ### Frameworks
 
-* **Spring Boot:** "Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run"." Read (https://spring.io/projects/spring-boot)
+* **Spring Boot:** "Spring Boot helps to create stand-alone, production-grade Spring based Applications that you can "just run"." Read (https://spring.io/projects/spring-boot)
 * **Apache Kafka:** Apache Kafka is a distributed streaming platform, based on subscribed-publish-consumer model to exchange messages between producer and consumer. Read more (https://kafka.apache.org/intro)
 * **Apache Zookeeper:** "ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services." (https://zookeeper.apache.org/)
 * **Docker-compose:** Docker Compose is a tool for defining and running multi-container Docker applications. Read more (https://docs.docker.com/compose/)
@@ -15,7 +15,7 @@ This little project demonstrate the easier and simpler way to create kafka produ
 I used docker-compose to run Zookeeper and Kafka containers, so no need to install Kafka and Zookeeper locally.
 
 ### Walk through the code
-Spring Boot saves the developers from complex configurations for Kafka, and provides some properties to configure Kafka Producer and Consumer.
+Spring Boot saves the developers from complex configurations for Kafka, and provides some properties in easy-t-use-way to configure Kafka Producer and Consumer.
 
 ```yml
 server:
@@ -39,7 +39,7 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 ```
 
-The producer sends message serlialized in string format, for that purpose I used StringSerializer and StringDeserializer. 
+StringSerializer and StringDeserializer are used to send and receive messages in String format. 
 
 Message class is simple POJO,
 
@@ -57,7 +57,7 @@ public class Message {
 } 
 ```
 
-Now we left with just to make a KafkaProducer class to send the message and a KafkaConsumer class to receive that message.
+Now we left with just to make a KafkaProducer class to send the message and a KafkaConsumer class to receive the message.
 
 ```java
 @Slf4j
@@ -113,7 +113,7 @@ public class KafkaConsumer {
 }
 ```
 
-KafkaConsumer has one very simple onMessage callback method. @KafkaListner annotation does the magic for you.
+KafkaConsumer has one very simple onMessage handler. @KafkaListner annotation does the magic for you.
 
 ConsumerRecord is the data structure which carries all the necessary information for the exchanged message.
 
