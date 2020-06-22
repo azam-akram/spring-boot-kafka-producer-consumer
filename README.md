@@ -1,6 +1,6 @@
 # spring-boot-kafka-producer-consumer
 
-This little project demonstrate the easier and simpler way to create kafka producer and consumer and dockerizing it. The Producer sends a message to Kafka topic and the consumer consumes that message, That's it!
+This little project demonstrate the easier and simpler way to create kafka producer and consumer and dockerizing it. The Producer sends a message to Kafka topic which is consumed y the consumer, That's it!
 
 ### Frameworks
 
